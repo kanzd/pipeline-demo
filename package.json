@@ -1,0 +1,34 @@
+{
+  "name": "pipeline-demo-new-prax-1",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@enterprise-ui/canvas-ui-css": "7.10.2",
+    "@enterprise-ui/canvas-ui-react": "7.10.2",
+    "@enterprise-ui/icons": "1.13.0",
+    "@types/node": "20.8.10",
+    "@typescript-eslint/eslint-plugin": "6.8.0",
+    "@typescript-eslint/parser": "6.8.0",
+    "praxis-scripts": "20.2.0",
+    "typescript": "5.2.2"
+  },
+  "scripts": {
+    "start": "praxis-scripts start",
+    "build": "praxis-scripts build",
+    "test": "praxis-scripts test",
+    "eject": "praxis-scripts eject",
+    "format": "praxis-scripts format 'src/**/*.{ts,tsx}'",
+    "lint": "praxis-scripts lint 'src/**/*.{ts,tsx}'",
+    "release": "praxis-scripts release",
+    "inspect": "praxis-scripts inspect",
+    "prepare": "husky install"
+  },
+  "browserslist": {
+    "development": [
+      "extends @praxis/browserslist-config/default"
+    ],
+    "production": [
+      "extends @praxis/browserslist-config/default"
+    ]
+  }
+}

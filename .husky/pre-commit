@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# githook that runs lint on commits
+# learn more about overriding or adding addtional hooks here: https://github.com/typicode/husky
+npx praxis-scripts precommit

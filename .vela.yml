@@ -1,0 +1,70 @@
+# 👋 “Hey” from the Praxis team
+
+# Vela tests, builds, and packages Praxis output into an nginx webserver within a Docker image.
+#
+# 👍 Praxis Hosting Guide @ https://praxis.prod.target.com/guides/hosting
+# 🤙 Template Tutorials @ https://go-vela.github.io/docs/templates/tutorials/
+
+version: '1'
+
+# Praxis 🤝 Vela QuickStart template
+# This section specifies where to find the template.
+templates:
+  - name: praxis
+    source: git.target.com/Praxis-Framework/create-praxis-app/templates/vela/praxis/20/template.yml@production
+    type: github
+
+steps:
+  # Invoke the default template.
+  # See the default pipeline behavior at https://pages.git.target.com/vela/doc-site/templates/registry/tap/praxis/#template-details
+  # See the supported variables at https://pages.git.target.com/vela/doc-site/templates/registry/tap/praxis/#variables
+  # See the step documentation for more advanced functionality such as multiple environments or rulesets https://go-vela.github.io/docs/concepts/pipeline/steps/
+  - name: praxis-pipeline
+    template:
+      name: praxis
+      vars:
+        install_command: npm ci
+        node_image: hub.docker.target.com/node:20.11.0@sha256:9aa3de5470c99408fda002dc1f406e92a31daf0492eb33d857d8d9d252edcc52
+        docker:
+          # enable_bubblebath: true
+          path: app/pipeline-demo-new-prax-1
+        build_environments:
+          - name: dev
+            ruleset:
+              event: push
+              # Default repository branch (main, trunk, master, etc):
+              branch: '${VELA_REPO_BRANCH}'
+            docker:
+              tags:
+                # "b123-a4b3c2d1"
+                - 'b${VELA_BUILD_NUMBER}-${VELA_BUILD_COMMIT:0:8}'
+
+          # Vela "tag" events are disabled by default. Enable them in your app’s "settings" page in Vela.
+          - name: prod
+            ruleset:
+              event: tag
+            docker:
+              tags:
+                # "v1.0.0-123-a4b3c2d1"
+                - '${VELA_BUILD_TAG}-${VELA_BUILD_NUMBER}-${VELA_BUILD_COMMIT:0:8}'
+
+secrets:
+  # Shared secrets for TAP team Docker registry
+  - name: docker_password
+    key: tap/vela-secrets/ARTIFACTORY_SVCPEJKN001_BINREPO
+    engine: native
+    type: shared
+
+  # Shared secrets for Vela team s3 bucket
+  - name: cache_s3_access_key
+    key: vela/prod-secrets/cache_s3_access_key
+    engine: native
+    type: shared
+  - name: cache_s3_secret_key
+    key: vela/prod-secrets/cache_s3_secret_key
+    engine: native
+    type: shared
+  - name: cache_s3_server
+    key: vela/prod-secrets/cache_s3_server
+    engine: native
+    type: shared
