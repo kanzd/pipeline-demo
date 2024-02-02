@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 // import Component from "./DynamicGrouping/index";
 import '@enterprise-ui/canvas-ui-css'
+
 import EnterpriseIcon, {
   MailIcon,
   SearchIcon,
@@ -147,6 +148,7 @@ const initialEdges = [
     animated: true,
   },
 ]
+
 const App = () => {
   const [isSideNavOpen, setIsSideNavOpen] = useState(true)
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes as any)
@@ -428,6 +430,7 @@ const App = () => {
           <ReactFlowComponent
             nodes={nodes}
             edges={edges}
+            setNodes={setNodes}
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
             setEdges={setEdges}

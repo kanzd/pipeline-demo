@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@dagrejs/dagre": "1.0.4",
     "@enterprise-ui/canvas-ui-css": "7.10.2",
     "@enterprise-ui/canvas-ui-react": "7.10.2",
     "@enterprise-ui/icons": "1.13.0",
     "@types/node": "20.8.10",
     "@typescript-eslint/eslint-plugin": "6.8.0",
     "@typescript-eslint/parser": "6.8.0",
+    "elkjs": "0.9.1",
     "praxis-scripts": "20.2.0",
     "reactflow": "11.10.3",
     "typescript": "5.2.2"
