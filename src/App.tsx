@@ -239,7 +239,12 @@ const App = () => {
                           memoryMB: 2048,
                           virtualCores: 1,
                         },
-                        connections: edges,
+                        connections: edges.map((value, index) => {
+                          return {
+                            from: value.source,
+                            to: value.target,
+                          }
+                        }),
                         comments: [],
                         postActions: [],
                         properties: {},
