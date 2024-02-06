@@ -5,6 +5,8 @@ import ReactFlow, {
   addEdge,
   useReactFlow,
   ReactFlowProvider,
+  MiniMap,
+  Controls,
 } from 'reactflow'
 import ELK from 'elkjs/lib/elk.bundled.js'
 import Dagre from '@dagrejs/dagre'
@@ -65,8 +67,10 @@ const HorizontalFlow = ({
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
       fitView
-      attributionPosition="bottom-left"
-    ></ReactFlow>
+    >
+      <MiniMap style={{ height: 120 }} zoomable pannable />
+      <Controls />
+    </ReactFlow>
   )
 }
 const HorizontalFlowComponent = (props: any) => {

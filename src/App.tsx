@@ -245,7 +245,14 @@ const App = () => {
                         properties: {},
                         processTimingEnabled: true,
                         stageLoggingEnabled: false,
-                        stages: nodes,
+                        stages: nodes.map((value: any, index) => {
+                          return {
+                            name: value.data.label,
+                            plugin: value?.plugin ?? {},
+                            properties: value?.properties ?? {},
+                            outputSchema: value?.outputSchema ?? {},
+                          }
+                        }),
                         schedule: '0 1 */1 * *',
                         engine: 'spark',
                         numOfRecordsPreview: 100,
@@ -385,6 +392,9 @@ const App = () => {
                           id: `horizontal-${value.name}`,
                           sourcePosition: 'right',
                           targetPosition: 'left',
+                          plugin: value.plugin,
+                          properties: value.properties,
+                          outputSchema: value.outputSchema,
                           data: { label: value.name },
                           position: { x: (x += 500), y: y },
                         }
@@ -400,8 +410,6 @@ const App = () => {
                         }
                       },
                     )
-                    console.log(nodes)
-                    console.log(edges)
                     setNodes(nodes)
                     setEdges(edges)
                     setModal(false)
